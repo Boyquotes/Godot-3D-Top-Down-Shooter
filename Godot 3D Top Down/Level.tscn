@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.866667, 0.133333, 0.333333, 0.933333 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.109804, 0.101961, 0.101961, 1 )
+
+[node name="Level" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59543, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Body" type="MeshInstance" parent="Player"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Eyes" type="MeshInstance" parent="Player/Body"]
+transform = Transform( 0.13, 0, 0, 0, -5.68248e-09, 0.8554, 0, -0.13, -3.73907e-08, 0.904374, 0.00983666, -0.575218 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Ground" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+use_collision = true
+width = 22.0
+depth = 22.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.755769, -0.542188, 0.367213, -0.185397, 0.714989, 0.674106, -0.628046, 0.441388, -0.640886, 9.40512, 7.13338, -2.53865 )
+shadow_enabled = true
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.550874, 0.834588, 0, -0.834588, 0.550874, 0, 17.1001, 12.8274 )
