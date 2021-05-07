@@ -1,10 +1,13 @@
 extends KinematicBody
 
+onready var gun_controller = $GunController
+
 var speed := 8.0
 var velocity = Vector3.ZERO
 
 func _process(delta):
 	
+	# Movement
 	velocity = Vector3.ZERO
 	
 	if Input.is_action_pressed("ui_right"):
@@ -19,3 +22,7 @@ func _process(delta):
 	velocity = velocity.normalized() * speed
 	
 	move_and_slide(velocity)
+		
+	# Shoot
+	if Input.is_action_pressed("primary_action"):
+		gun_controller.shoot()

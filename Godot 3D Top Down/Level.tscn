@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://GunController.gd" type="Script" id=3]
+[ext_resource path="res://Gun.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -29,9 +31,16 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Eyes" type="MeshInstance" parent="Player/Body"]
-transform = Transform( 0.13, 0, 0, 0, -5.68248e-09, 0.8554, 0, -0.13, -3.73907e-08, 0.904374, 0.00983666, -0.575218 )
+transform = Transform( 0.163818, 1.88463e-22, 2.10326e-08, 3.19644e-09, -5.68248e-09, 0.596751, -1.39721e-16, -0.13, -2.60848e-08, 0.983945, 0.0177941, -0.575218 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
+
+[node name="Hand" type="Position3D" parent="Player/Body"]
+transform = Transform( 1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.684653, 0.951401, 0 )
+
+[node name="GunController" type="Node" parent="Player"]
+script = ExtResource( 3 )
+StartingWeapon = ExtResource( 4 )
 
 [node name="Ground" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -44,4 +53,5 @@ transform = Transform( -0.755769, -0.542188, 0.367213, -0.185397, 0.714989, 0.67
 shadow_enabled = true
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.550874, 0.834588, 0, -0.834588, 0.550874, 0, 17.1001, 12.8274 )
+transform = Transform( 1, 0, 0, 0, 0.481295, 0.876559, 0, -0.876559, 0.481295, 0, 17.1001, 12.8274 )
+fov = 58.0
