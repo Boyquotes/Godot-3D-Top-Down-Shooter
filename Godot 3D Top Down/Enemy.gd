@@ -27,3 +27,6 @@ func _on_Timer_timeout():
 #	print("Looking for Player!")
 	update_path(player.global_transform.origin)
 	current_node = 0
+
+func _on_Stats_you_died_signal():
+	queue_free()

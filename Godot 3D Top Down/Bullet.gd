@@ -1,6 +1,7 @@
 extends Spatial
 
 export var speed := 70.0
+export var damage := 1.0
 
 const KILL_TIME = 2
 var timer := 0
@@ -13,6 +14,10 @@ func _physics_process(delta):
 	if timer >= KILL_TIME:
 		queue_free()
 
-func _on_Area_body_entered(body):
+func _on_Area_body_entered(body: Node):
 #	print("I hit you! ", body)
 	queue_free()
+	
+	if body.has_node("Stats"):
+		var stats_node = body.find_node("Stats") as Stats
+		stats_node.take_hit(damage)
