@@ -1,5 +1,7 @@
 extends KinematicBody
 
+class_name Enemy
+
 export var speed := 5.0
 
 onready var nav = $"../Navigation" as Navigation
