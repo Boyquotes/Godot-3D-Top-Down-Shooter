@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b449926a-f1a3-45d1-8f1b-2358aa85e31c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Gun.gd" beforeDir="false" afterPath="$PROJECT_DIR$/Gun.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gun.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Gun.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Level.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Level.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.gd" beforeDir="false" afterPath="$PROJECT_DIR$/Main.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.gd" beforeDir="false" afterPath="$PROJECT_DIR$/Player.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Player.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stats.gd" beforeDir="false" afterPath="$PROJECT_DIR$/Stats.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default_env.tres" beforeDir="false" afterPath="$PROJECT_DIR$/default_env.tres" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ground_grid.png.import" beforeDir="false" afterPath="$PROJECT_DIR$/ground_grid.png.import" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon.png.import" beforeDir="false" afterPath="$PROJECT_DIR$/icon.png.import" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Bullet.gd" />
+      <option value="$PROJECT_DIR$/Enemy.gd" />
+      <option value="$PROJECT_DIR$/Player.gd" />
+    </changedPaths>
+  </component>
+  <component name="ProjectId" id="1sdGUJSw4ZiOsTN2jiwOHXDFMbm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="ApplicationSettingsConfigurable" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b449926a-f1a3-45d1-8f1b-2358aa85e31c" name="Default Changelist" comment="" />
+      <created>1621195088864</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621195088864</updated>
+      <workItem from="1621195102874" duration="85000" />
+      <workItem from="1621195316404" duration="438000" />
+      <workItem from="1621195986225" duration="28000" />
+      <workItem from="1621196071160" duration="254000" />
+      <workItem from="1621196365161" duration="104000" />
+      <workItem from="1621204133212" duration="246000" />
+      <workItem from="1621204401499" duration="77000" />
+      <workItem from="1621204501749" duration="91000" />
+      <workItem from="1621298541026" duration="43000" />
+      <workItem from="1621298717113" duration="321000" />
+      <workItem from="1621299613136" duration="983000" />
+      <workItem from="1621301963237" duration="294000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
