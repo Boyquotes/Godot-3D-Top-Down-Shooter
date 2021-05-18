@@ -1,7 +1,7 @@
 extends Spatial
 
-export var speed := 70.0
-export var damage := 1.0
+export (float) var speed := 70.0
+export (float) var damage := 1.0
 
 const KILL_TIME = 2
 var timer := 0
