@@ -1,8 +1,8 @@
 extends Spatial
 
 export (PackedScene) var Bullet
-export var muzzle_speed := 30.0
-export var millis_between_shots := 300
+export (float) var muzzle_speed := 30.0
+export (float) var millis_between_shots := 150.0
 
 onready var muzzle = $Muzzle
 onready var rof_timer = $Timer
@@ -12,7 +12,7 @@ var can_shoot := true
 func _ready():
 	rof_timer.wait_time = millis_between_shots / 1000.0
 	
-func _process(delta):
+func _process(_delta):
 	pass
 	
 func shoot():

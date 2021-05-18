@@ -1,19 +1,18 @@
 extends Node
-
 class_name Stats
 
 signal you_died_signal
 
-export var max_HP := 10.0
+export (float) var max_HP := 10.0
 
-var current_HP := max_HP
+onready var current_HP := max_HP
 
 func _ready():
-	pass 
-
+	pass
+	
 func take_hit(damage):
 	current_HP -= damage
-	print("I'm hit ! - ", current_HP, "/", max_HP)
+#	print("I'm hit ! - ", current_HP, "/", max_HP)
 	
 	if current_HP <= 0:
 		die()

@@ -28,7 +28,7 @@ func start_next_wave():
 
 func connect_to_enemy_signals(enemy: Enemy):
 	var stats: Stats = enemy.get_node("Stats")
-	stats.connect("you_died_signal", self, "_on_Enemy_Stats_you_died_signal")
+	var _err = stats.connect("you_died_signal", self, "_on_Enemy_Stats_you_died_signal")
 
 func _on_Enemy_Stats_you_died_signal():
 #	print("I detected an enemy death !")
