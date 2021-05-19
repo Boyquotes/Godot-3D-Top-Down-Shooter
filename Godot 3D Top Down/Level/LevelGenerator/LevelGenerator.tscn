@@ -1,18 +1,268 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Level/LevelGenerator/LevelGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/Materials/LevelGrid.tres" type="Material" id=4]
+[ext_resource path="res://Level/LevelGenerator/FGBGShaderMaterial.tres" type="Material" id=5]
+
+[sub_resource type="NavigationMesh" id=1]
 
 [node name="Map" type="Spatial"]
 script = ExtResource( 1 )
 GroundScene = ExtResource( 2 )
 ObstacleScene = ExtResource( 3 )
-map_width = 13
 map_depth = 15
 obstacle_density = 0.25
-obstacle_min_height = 1.962
-obstacle_max_height = 3.526
-foreground_color = Color( 0.0745098, 0.717647, 0.207843, 1 )
-background_color = Color( 0.0784314, 0.227451, 0.815686, 1 )
-rng_seed = 12420
+obstacle_max_height = 3.36
+foreground_color = Color( 0.027451, 0.815686, 0.945098, 1 )
+background_color = Color( 0.203922, 0.760784, 0.407843, 1 )
+rng_seed = 12460
+level_name = "Level1"
+
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 1 )
+
+[node name="Ground" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+use_collision = true
+collision_layer = 9
+width = 22.0
+depth = 30.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.22573, 10 )
+use_collision = true
+height = 2.45145
+material = ExtResource( 5 )
+
+[node name="CSGBox2" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.03297, -8 )
+use_collision = true
+height = 2.06593
+material = ExtResource( 5 )
+
+[node name="CSGBox3" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.915002, -6 )
+use_collision = true
+height = 1.83
+material = ExtResource( 5 )
+
+[node name="CSGBox4" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575702, 10 )
+use_collision = true
+height = 1.1514
+material = ExtResource( 5 )
+
+[node name="CSGBox5" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.05941, 10 )
+use_collision = true
+height = 2.11882
+material = ExtResource( 5 )
+
+[node name="CSGBox6" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.20696, -2 )
+use_collision = true
+height = 2.41391
+material = ExtResource( 5 )
+
+[node name="CSGBox7" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.55933, 4 )
+use_collision = true
+height = 3.11866
+material = ExtResource( 5 )
+
+[node name="CSGBox8" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.66589, -2 )
+use_collision = true
+height = 3.33177
+material = ExtResource( 5 )
+
+[node name="CSGBox9" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.503545, -4 )
+use_collision = true
+height = 1.00709
+material = ExtResource( 5 )
+
+[node name="CSGBox10" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.43082, -10 )
+use_collision = true
+height = 2.86165
+material = ExtResource( 5 )
+
+[node name="CSGBox11" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.07111, 6 )
+use_collision = true
+height = 2.14221
+material = ExtResource( 5 )
+
+[node name="CSGBox12" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.569106, 14 )
+use_collision = true
+height = 1.13821
+material = ExtResource( 5 )
+
+[node name="CSGBox13" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.639441, -10 )
+use_collision = true
+height = 1.27888
+material = ExtResource( 5 )
+
+[node name="CSGBox14" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.20438, -4 )
+use_collision = true
+height = 2.40875
+material = ExtResource( 5 )
+
+[node name="CSGBox15" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09558, 4 )
+use_collision = true
+height = 2.19117
+material = ExtResource( 5 )
+
+[node name="CSGBox16" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.70671, 14 )
+use_collision = true
+height = 1.41342
+material = ExtResource( 5 )
+
+[node name="CSGBox17" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.723628, -6 )
+use_collision = true
+height = 1.44726
+material = ExtResource( 5 )
+
+[node name="CSGBox18" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.856399, -8 )
+use_collision = true
+height = 1.7128
+material = ExtResource( 5 )
+
+[node name="CSGBox19" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.531076, 6 )
+use_collision = true
+height = 1.06215
+material = ExtResource( 5 )
+
+[node name="CSGBox20" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.973697, 10 )
+use_collision = true
+height = 1.94739
+material = ExtResource( 5 )
+
+[node name="CSGBox21" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.06861, -10 )
+use_collision = true
+height = 2.13721
+material = ExtResource( 5 )
+
+[node name="CSGBox22" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.569586, 12 )
+use_collision = true
+height = 1.13917
+material = ExtResource( 5 )
+
+[node name="CSGBox23" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.57854, 8 )
+use_collision = true
+height = 3.15708
+material = ExtResource( 5 )
+
+[node name="CSGBox24" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.55783, -14 )
+use_collision = true
+height = 3.11566
+material = ExtResource( 5 )
+
+[node name="CSGBox25" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.43325, 14 )
+use_collision = true
+height = 2.86649
+material = ExtResource( 5 )
+
+[node name="CSGBox26" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.719826, 6 )
+use_collision = true
+height = 1.43965
+material = ExtResource( 5 )
+
+[node name="CSGBox27" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.53521, -8 )
+use_collision = true
+height = 3.07043
+material = ExtResource( 5 )
+
+[node name="CSGBox28" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.16983, -10 )
+use_collision = true
+height = 2.33966
+material = ExtResource( 5 )
+
+[node name="CSGBox29" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.19395, 8 )
+use_collision = true
+height = 2.3879
+material = ExtResource( 5 )
+
+[node name="CSGBox30" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.612218, -12 )
+use_collision = true
+height = 1.22444
+material = ExtResource( 5 )
+
+[node name="CSGBox31" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.34857, 2 )
+use_collision = true
+height = 2.69713
+material = ExtResource( 5 )
+
+[node name="CSGBox32" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.704242, -8 )
+use_collision = true
+height = 1.40848
+material = ExtResource( 5 )
+
+[node name="CSGBox33" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.29847, 10 )
+use_collision = true
+height = 2.59693
+material = ExtResource( 5 )
+
+[node name="CSGBox34" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.525991, 2 )
+use_collision = true
+height = 1.05198
+material = ExtResource( 5 )
+
+[node name="CSGBox35" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.531391, 4 )
+use_collision = true
+height = 1.06278
+material = ExtResource( 5 )
+
+[node name="CSGBox36" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.575454, -12 )
+use_collision = true
+height = 1.15091
+material = ExtResource( 5 )
+
+[node name="CSGBox37" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.53033, -10 )
+use_collision = true
+height = 3.06066
+material = ExtResource( 5 )
+
+[node name="CSGBox38" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.29691, 0 )
+use_collision = true
+height = 2.59381
+material = ExtResource( 5 )
+
+[node name="CSGBox39" type="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.4599, 0 )
+use_collision = true
+height = 2.91981
+material = ExtResource( 5 )
