@@ -4,7 +4,7 @@ extends Spatial
 export var GroundScene: PackedScene
 export var ObstacleScene: PackedScene
 
-var shader_material: ShaderMaterial
+export var navmesh_template: NavigationMesh
 
 export (int, 1, 21) var map_width = 11 setget set_width
 export (int, 1, 15) var map_depth = 11 setget set_depth
@@ -24,49 +24,47 @@ export (bool) var generate_level = false setget set_generate_level
 export (String) var level_name = "New Level"
 export (bool) var save_level = false setget set_save_level
 
-var map_coords_array := []
-var obstacle_map := []
-var map_center: Coord
+var shader_material: ShaderMaterial
 
-var level: Navigation
+var level: NavigationMap
 var navmesh_instance: NavigationMeshInstance
-
-class Coord:
-	var x: int
-	var z: int
-	
-# warning-ignore:shadowed_variable
-# warning-ignore:shadowed_variable
-	func _init(x, z):
-		self.x = x
-		self.z = z
-		
-	func _to_string() -> String:
-		return "(" + str(x) + "," + str(z) + ")" 
-		
-	func equals(coord):
-		return coord.x == self.x and coord.z == self.z
 
 func _ready() -> void:
 	pass
 	
 func set_generate_level(var _new_value):
-	generate_map()
+	generate_map() 
 
 func set_save_level(var new_value):
 	var packed_scene = PackedScene.new()
-	for child in level.get_children():
+	navmesh_instance.owner = level
+	for child in navmesh_instance.get_children():
 		child.owner = level
+	
 	packed_scene.pack(level)
 	var scene_ressource_path = "res://Level/LevelGenerator/GeneratedLevels/%s.tscn" %level_name
 	ResourceSaver.save(scene_ressource_path, packed_scene)
 	
+	level_name = increment_string(level_name)
+	property_list_changed_notify()
+	
+func increment_string(string: String):
+	# Example : NavMap23
+	var regex = RegEx.new()
+	regex.compile("\\d+$")
+	var result = regex.search(string)
+	var num = "0"
+	if result:
+		num = result.get_string() # num = "23"
+	
+	return string.trim_suffix(num) + str(int(num) + 1) # "23" -> 23 + 1 = 24 -> "24"
+	
 func set_fore_color(var new_value):
 	foreground_color = new_value
-
+	
 func set_back_color(var new_value):
 	background_color = new_value
-
+	
 func set_obs_max_height(var new_value):
 	obstacle_max_height = max(new_value, obstacle_min_height)
 	
@@ -78,14 +76,9 @@ func set_seed(var new_value):
 	
 func set_width(var new_value):
 	map_width = make_odd(new_value, map_width)
-	update_map_center()
-
+	
 func set_depth(var new_value):
 	map_depth = make_odd(new_value, map_depth)
-	update_map_center()
-	
-func update_map_center():
-	map_center = Coord.new(map_width / 2, map_depth / 2)
 	
 func set_obstacle_density(var new_value):
 	obstacle_density = new_value
@@ -98,39 +91,40 @@ func make_odd(new_int, old_int):
 			return new_int - 1
 	else:
 		return new_int
-		
-func fill_map_coords_array():
-	map_coords_array = []
-	for x in range (map_width):
-		for z in range (map_depth):
-			map_coords_array.append(Coord.new(x, z))
 			
 func fill_obstacle_map():
-	obstacle_map = []
+	level.obstacle_map = []
 	for x in range (map_width):
-		obstacle_map.append([])
+		level.obstacle_map.append([])
 		for z in range (map_depth):
-			obstacle_map[x].append(false)
-#	print(obstacle_map)
+			level.obstacle_map[x].append(false)
+#	print(level.obstacle_map)
 			
 func generate_map():
 	print("Generating Map...")
 	
 	clear_map()
 	add_level()
+	level.update_map_center()
 	add_ground()
 	update_obstacle_material()
 	add_obstacles()
-
+	
+	set_seed(rng_seed + 1)
+	property_list_changed_notify()
+	
 func clear_map():
 	for node in get_children():
-		node.queue_free()
-
+		node.free()
+	
 func add_level():
-	level = Navigation.new()
+	level = NavigationMap.new()
 	level.name = "Navigation"
 	add_child(level)
 	level.owner = self
+	
+	level.map_depth = map_depth
+	level.map_width = map_width
 	
 	# Add Navmesh
 	navmesh_instance = NavigationMeshInstance.new()
@@ -138,8 +132,8 @@ func add_level():
 	navmesh_instance.owner = self
 	
 	# Navmesh instance
-	navmesh_instance.navmesh = NavigationMesh.new()
-
+	navmesh_instance.navmesh = navmesh_template.duplicate()
+	
 func add_ground():
 	var ground: CSGBox = GroundScene.instance()
 	ground.width = map_width * 2
@@ -155,27 +149,27 @@ func update_obstacle_material():
 	shader_material.set_shader_param("LevelDepth", map_depth * 2)
 	
 func add_obstacles():
-	fill_map_coords_array()
+	level.fill_map_coords_array()
 	fill_obstacle_map()
-#	print(map_coords_array)
+#	print(level.map_coords_array)
 	seed(rng_seed)
-	map_coords_array.shuffle()
-#	print(map_coords_array)
+	level.map_coords_array.shuffle()
+#	print(level.map_coords_array)
 	
-	var num_obstacles: int = map_coords_array.size() * obstacle_density
+	var num_obstacles: int = level.map_coords_array.size() * obstacle_density
 	var current_obstacle_count = 0
 	
 	if num_obstacles > 0:
-		for coord in map_coords_array.slice(0, num_obstacles - 1):
-			if not map_center.equals(coord):
+		for coord in level.map_coords_array.slice(0, num_obstacles - 1):
+			if not level.map_center.equals(coord):
 				current_obstacle_count += 1
-				obstacle_map[coord.x][coord.z] = true
+				level.obstacle_map[coord.x][coord.z] = true
 				if map_is_fully_accessible(current_obstacle_count):
 					create_obstacle_at(coord.x, coord.z)
 				else:
 					current_obstacle_count -= 1
-					obstacle_map[coord.x][coord.z] = false
-
+					level.obstacle_map[coord.x][coord.z] = false
+	
 func map_is_fully_accessible(current_obstacle_count):
 	# Flood fill
 	var we_already_checked_here = []
@@ -184,30 +178,30 @@ func map_is_fully_accessible(current_obstacle_count):
 		for z in range (map_depth):
 			we_already_checked_here[x].append(false)
 			
-	var coords_to_check = [map_center]
-	we_already_checked_here[map_center.x][map_center.z] = true
+	var coords_to_check = [level.map_center]
+	we_already_checked_here[level.map_center.x][level.map_center.z] = true
 	var accessible_tile_count = 1
 	
 	while coords_to_check:
-		var current_tile: Coord = coords_to_check.pop_front()
+		var current_tile: NavigationMap.Coord = coords_to_check.pop_front()
 		for x in [-1, 0, 1]:
 			for z in [-1, 0, 1]:
 				if x == 0 or z == 0: #non-diagonal neighbor
-					var neighbor = Coord.new(current_tile.x + x, current_tile.z + z)
+					var neighbor = NavigationMap.Coord.new(current_tile.x + x, current_tile.z + z)
 					# Make sure we don't go off map
 					if on_the_map(neighbor):
 						if not we_already_checked_here[neighbor.x][neighbor.z]:
-							if not obstacle_map[neighbor.x][neighbor.z]:
+							if not level.obstacle_map[neighbor.x][neighbor.z]:
 								we_already_checked_here[neighbor.x][neighbor.z] = true
 								coords_to_check.append(neighbor)
 								accessible_tile_count += 1
-
+	
 	var target_accessible_tile_count = map_width * map_depth - current_obstacle_count
 	if target_accessible_tile_count == accessible_tile_count:
 		return true
 	else:
 		return false
-
+	
 func on_the_map(neighbor):
 	return neighbor.x >= 0 and neighbor.x < map_width and neighbor.z >= 0 and neighbor.z < map_depth 
 
@@ -225,7 +219,7 @@ func create_obstacle_at(x, z):
 	new_obstacle.transform.origin = obstacle_position + Vector3(0, new_obstacle.height / 2, 0)
 	navmesh_instance.add_child(new_obstacle)
 	new_obstacle.owner = self
-
+	
 func get_obstacle_height():
 	return rand_range(obstacle_min_height, obstacle_max_height)
 	

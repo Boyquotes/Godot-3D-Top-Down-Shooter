@@ -3,6 +3,12 @@ extends Spatial
 onready var camera = $Camera
 onready var player = $Player
 onready var hand = $Player/Body/Hand
+onready var navmap = $Navigation
+
+func _ready() -> void:
+	print(navmap.map_depth)
+	print(navmap.map_width)
+	print(navmap.obstacle_map)
 
 var ray_origin := Vector3.ZERO
 var ray_target := Vector3.ZERO
